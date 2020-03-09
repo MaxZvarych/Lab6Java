@@ -1,9 +1,6 @@
 package ua.lviv.iot;
 
-
 import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +10,7 @@ import ua.lviv.iot.textprocessing.TextEditingWithPatterns;
 
 public class TextEditingTest extends TestCase {
 	Scanner text = new Scanner(System.in);
+
 	@Test
 	public void checkText() {
 		String textToCheck = text.nextLine();
@@ -25,8 +23,7 @@ public class TextEditingTest extends TestCase {
 		for (String listOfFoundStrings : TextEditingWithPatterns.listOfFoundStrings) {
 			System.out.println(listOfFoundStrings);
 		}
-
+		assertEquals("aaa", TextEditingWithPatterns.listOfFoundStrings.get(0));
 	}
 
-	
 }
