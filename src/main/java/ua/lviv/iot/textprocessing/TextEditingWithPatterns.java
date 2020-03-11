@@ -6,15 +6,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextEditingWithPatterns {
-	public static List<String> listOfFoundStrings = new LinkedList<>();
 
-	public static void findWordsByCtyteria(final String patternString, String textToCheck) {
+
+	public static List<String> findWordsByCtyteria(final String patternString, String textToCheck) {
+		List<String> listOfFoundStrings = new LinkedList<>();
 		Pattern cryteria = Pattern.compile(patternString);
 		Matcher match = cryteria.matcher(textToCheck);
 		while (match.find()) {
-			System.out.println(match.group());
 			listOfFoundStrings.add(match.group());
 		}
-
+      return listOfFoundStrings;
 	}
 }
