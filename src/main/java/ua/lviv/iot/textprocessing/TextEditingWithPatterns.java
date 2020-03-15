@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class TextEditingWithPatterns {
 
-
 	public static List<String> findWordsByCtyteria(final String patternString, String textToCheck) {
 		List<String> listOfFoundStrings = new LinkedList<>();
 		Pattern cryteria = Pattern.compile(patternString);
@@ -15,6 +14,6 @@ public class TextEditingWithPatterns {
 		while (match.find()) {
 			listOfFoundStrings.add(match.group());
 		}
-      return listOfFoundStrings;
+		return listOfFoundStrings;
 	}
 }
