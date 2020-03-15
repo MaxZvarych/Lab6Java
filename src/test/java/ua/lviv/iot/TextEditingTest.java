@@ -11,37 +11,29 @@ import java.util.Scanner;
 
 import org.junit.jupiter.api.Test;
 
-import ua.lviv.iot.textprocessing.InputOutput;
-import ua.lviv.iot.textprocessing.InputOutput.*;
 import ua.lviv.iot.textprocessing.TextEditingWithPatterns;
 
 public class TextEditingTest {
-	//Scanner text = new Scanner(System.in);
-	
+	public static String getInput() {
+		Scanner sc = new Scanner(System.in);
+		return sc.nextLine();
+	}
+
 	@Test
 	public void checkText() {
-		 InputOutput inputOutput= new InputOutput();
-		  String input = "abc leader Oleksnds after leaving home died";
-		    InputStream in = new ByteArrayInputStream(input.getBytes());
-		    System.setIn(in);
-		 String textToCheck = InputOutput.getInput();
-		//String textToCheck = text.nextLine();
+		String input = "abc leader Oleksnds after leaving home developed his own motobike";
+		InputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		String textToCheck = getInput();
+
 		List<String> listOfFoundStrings = new LinkedList<>();
-	//	System.out.println("Your text:" + textToCheck);
-		listOfFoundStrings=TextEditingWithPatterns.findWordsByCtyteria("\\b[aeyuioAEYUIO]\\w*\\b", textToCheck);
-//		for (String temporaryList : listOfFoundStrings) {
-//			System.out.println(temporaryList);
-//		}
-		//System.out.println("\n");
+		listOfFoundStrings = TextEditingWithPatterns.findWordsByCtyteria("\\b[aeyuioAEYUIO]\\w*\\b", textToCheck);
 		Comparator<String> compareByFirstConsonantal = Comparator.comparing(o -> o.replaceFirst("[aeyuioAEYUIO]*", ""));
 		listOfFoundStrings.sort(compareByFirstConsonantal);
-	//	System.out.println("Sorted List:");
-//		for (String temporaryList : listOfFoundStrings) {
-//			System.out.println(temporaryList);
-//		}
 		assertEquals("abc", listOfFoundStrings.get(0));
 		assertEquals("after", listOfFoundStrings.get(1));
 		assertEquals("Oleksnds", listOfFoundStrings.get(2));
+		assertEquals("own", listOfFoundStrings.get(3));
 	}
 
 }
