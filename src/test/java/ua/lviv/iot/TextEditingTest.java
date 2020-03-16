@@ -3,6 +3,7 @@ package ua.lviv.iot;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -22,10 +23,14 @@ public class TextEditingTest {
 	@Test
 	public void checkText() {
 		String input = "abc leader Oleksnds after leaving home developed his own motobike";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-		String textToCheck = getInput();
+		try (InputStream in = new ByteArrayInputStream(input.getBytes())) {
+			System.setIn(in);
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String textToCheck = getInput();
 		List<String> listOfFoundStrings = new LinkedList<>();
 		listOfFoundStrings = TextEditingWithPatterns.findWordsByCtyteria("\\b[aeyuioAEYUIO]\\w*\\b", textToCheck);
 		Comparator<String> compareByFirstConsonantal = Comparator.comparing(o -> o.replaceFirst("[aeyuioAEYUIO]*", ""));
