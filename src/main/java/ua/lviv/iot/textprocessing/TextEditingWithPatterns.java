@@ -1,5 +1,6 @@
 package ua.lviv.iot.textprocessing;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,6 +15,9 @@ public class TextEditingWithPatterns {
 		while (match.find()) {
 			listOfFoundStrings.add(match.group());
 		}
+		Comparator<String> compareByFirstConsonantal = Comparator
+				.comparing(o -> o.replaceFirst("[aeyuioAEYUIO]*", ""));
+		listOfFoundStrings.sort(compareByFirstConsonantal);
 		return listOfFoundStrings;
 	}
 }
